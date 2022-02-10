@@ -11,4 +11,18 @@ const sentErrorNotification = (message: string) => toast(message, {
     }
 });
 
-export { sentErrorNotification };
+const sentSuccessNotification = (message: string) => toast(message, {
+    duration: 4000,
+    position: 'top-center',
+    icon: <FaInfo color="#FFF" />,
+    style: {
+        background: '#93C00C',
+        color: "#FFF"
+    }
+});
+
+
+export {
+    sentErrorNotification,
+    sentSuccessNotification
+};

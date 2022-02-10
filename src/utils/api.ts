@@ -8,22 +8,22 @@ const getMovies = async (page: number, sortParam: string) => {
     };
 
     const url = `${baseUrl}discover/movie`;
-    return await fetchGet(url, params);
+    return await customFetch({ url, params });
 }
 
 const getMovieDetail = async (id: string) => {
     const url = `${baseUrl}movie/${id}}`;
-    return await fetchGet(url);
+    return await customFetch({ url });
 }
 
 const getMovieCredits = async (id: string) => {
     const url = `${baseUrl}movie/${id}/credits`;
-    return await fetchGet(url);
+    return await customFetch({ url });
 }
 
 const getMovieRecommendations = async (id: string) => {
     const url = `${baseUrl}movie/${id}/recommendations`;
-    return await fetchGet(url);
+    return await customFetch({ url });
 }
 
 const searchMovies = async (query: string) => {
@@ -32,10 +32,42 @@ const searchMovies = async (query: string) => {
     };
 
     const url = `${baseUrl}search/movie`;
-    return await fetchGet(url, params);
+    return await customFetch({ url, params });
 }
 
-const fetchGet = async (url: string, params?: Record<string, any>) => {
+const rateMovie = async (id: number, rate: number, guestSessionId: string) => {
+    const params: Record<string, any> = {
+        'guest_session_id': guestSessionId
+    };
+
+    const url = `${baseUrl}movie/${id}}/rating`;
+
+    return await customFetch({
+        url,
+        params,
+        method: 'POST',
+        body: JSON.stringify({
+            value: rate
+        }),
+    });
+}
+
+const createGuestSessionId = async () => {
+    const url = `${baseUrl}authentication/guest_session/new`;
+    return await customFetch({ url });
+}
+
+const customFetch = async ({
+    url,
+    params,
+    method = 'GET',
+    body
+}: {
+    url: string,
+    params?: Record<string, any>,
+    method?: string,
+    body?: string
+}) => {
     const queryParams: Record<string, any> = {
         'api_key': token,
         ...params
@@ -44,11 +76,12 @@ const fetchGet = async (url: string, params?: Record<string, any>) => {
     const fetchUrl = `${url}?${buildQueryParams(queryParams)}`;
 
     return await fetch(fetchUrl, {
-        method: 'GET',
+        method,
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
-        }
+        },
+        body
     }).then((response) => {
         if (response.ok) {
             return response.json();
@@ -70,5 +103,7 @@ export {
     getMovieDetail,
     searchMovies,
     getMovieCredits,
-    getMovieRecommendations
+    getMovieRecommendations,
+    rateMovie,
+    createGuestSessionId
 }

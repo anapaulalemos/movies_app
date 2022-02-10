@@ -1,4 +1,5 @@
 interface Cast {
+    id: string;
     name: string;
     profile_path: string;
     character: string;

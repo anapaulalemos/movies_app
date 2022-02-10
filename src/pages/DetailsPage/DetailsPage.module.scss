@@ -11,6 +11,33 @@
     object {
         max-height: 280px;
     }
+
+
+    .imgContainer {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        h4 {
+            margin-bottom: 0;
+        }
+    }
+
+    .rating {
+        height: 70px;
+        width: 70px;
+        border: 3px solid variables.$primary_color;
+        color: variables.$primary_color;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 50%;
+        text-align: center;
+        font-size: 26px;
+        margin-bottom: 16px;
+        font-weight: 900;
+    }
 }
 
 
@@ -20,5 +47,11 @@
     .items {
         display: flex;
         overflow-x: auto;   
+    }
+}
+
+@media (max-width: 600px) {
+    .header {
+        flex-direction: column;
     }
 }

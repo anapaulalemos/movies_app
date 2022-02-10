@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { FaCalendar, FaClock, FaLanguage } from 'react-icons/fa';
 import { useParams } from 'react-router-dom';
+import ReactStars from 'react-stars';
 
 import NotFound from '../../assets/not_found.png';
 import Card from '../../components/Card/Card';
@@ -8,8 +9,8 @@ import Container from '../../components/Container/Container';
 import Date from '../../components/Date/Date';
 import { Credits } from '../../models/Credits';
 import Movie from '../../models/Movie';
-import { getMovieCredits, getMovieDetail, getMovieRecommendations } from '../../utils/api';
-import { sentErrorNotification } from '../../utils/notification';
+import { createGuestSessionId, getMovieCredits, getMovieDetail, getMovieRecommendations, rateMovie } from '../../utils/api';
+import { sentErrorNotification, sentSuccessNotification } from '../../utils/notification';
 import { isNonNullable, Nullable } from '../../utils/typeUtils';
 import styles from './DetailsPage.module.scss';
 
@@ -45,7 +46,18 @@ const DetailsPage = () => {
         fetchMovie();
     }, [id]);
 
-    const getCrew = () => {
+    const onRateMovie = async (rate: number) => {
+        try {
+            const { guest_session_id } = await createGuestSessionId();
+            await rateMovie(movie!.id, rate * 2, guest_session_id);
+
+            sentSuccessNotification('Movie successfully rated!');
+        } catch {
+            sentErrorNotification('Error when rating this movie!');
+        }
+    }
+
+    const getDirectors = () => {
         if (isNonNullable(movie)) {
             const directors = movie.credits?.crew.filter((crew) =>
                 crew.job === 'Director'
@@ -64,9 +76,9 @@ const DetailsPage = () => {
 
     const getCast = () => {
         if (isNonNullable(movie)) {
-            return movie.credits?.cast.map(({ character, name, profile_path }) =>
+            return movie.credits?.cast.map(({ id, character, name, profile_path }) =>
                 <Card
-                    key={character}
+                    key={id}
                     title={name}
                     imgPath={profile_path}
                     subtitle={character}
@@ -91,18 +103,27 @@ const DetailsPage = () => {
             {movie &&
                 <>
                     <header className={styles.header}>
-                        <object
-                            data={`https://image.tmdb.org/t/p/original/${movie.poster_path}`}
-                            width={199}
-                            type="image/jpeg">
-                            <div className={styles.imgNotFound}>
-                                <img
-                                    alt="Poster"
-                                    src={NotFound}
-                                    width={199}
-                                />
-                            </div>
-                        </object>
+                        <section className={styles.imgContainer}>
+                            <object
+                                data={`https://image.tmdb.org/t/p/original/${movie.poster_path}`}
+                                width={199}
+                                type="image/jpeg">
+                                <div className={styles.imgNotFound}>
+                                    <img
+                                        alt="Poster"
+                                        src={NotFound}
+                                        width={199}
+                                    />
+                                </div>
+                            </object>
+                            <h4>Rate this movie!</h4>
+                            <ReactStars
+                                count={5}
+                                size={24}
+                                color2={'#ffd700'}
+                                onChange={onRateMovie}
+                            />
+                        </section>
 
                         <section>
                             <h1>{movie.title}</h1>
@@ -123,13 +144,20 @@ const DetailsPage = () => {
                                 </span>
                             </h4>
 
+                            <div className={styles.rating} title="Rating">
+                                {movie.vote_average}
+                            </div>
+
                             <em>{movie.tagline}</em>
 
                             <h3>Overview</h3>
                             <span>{movie.overview}</span>
 
                             <br />
-                            {getCrew()}
+                            {getDirectors()}
+                            <br />
+
+
                         </section>
 
                     </header>
