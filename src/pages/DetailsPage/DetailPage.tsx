@@ -8,7 +8,7 @@ import Container from '../../components/Container/Container';
 import Date from '../../components/Date/Date';
 import { Credits } from '../../models/Credits';
 import Movie from '../../models/Movie';
-import { getMovieCredits, getMovieDetail } from '../../utils/api';
+import { getMovieCredits, getMovieDetail, getMovieRecommendations } from '../../utils/api';
 import { isNonNullable, Nullable } from '../../utils/typeUtils';
 import styles from './DetailsPage.module.scss';
 
@@ -17,18 +17,22 @@ const DetailsPage = () => {
     const [loading, setLoading] = useState(false);
 
     const [movie, setMovie] = useState<Nullable<Movie>>(null);
+    const [recommendations, setRecommendations] = useState<Nullable<Movie[]>>(null)
 
     const fetchMovie = async () => {
         setLoading(true);
 
         try {
-            const movieFetched: Movie = await getMovieDetail(id!);
+            const moviesFetched: Movie = await getMovieDetail(id!);
             const credits: Credits = await getMovieCredits(id!);
+            const { results } = await getMovieRecommendations(id!);
 
             setMovie({
-                ...movieFetched,
+                ...moviesFetched,
                 credits
             });
+
+            setRecommendations(results);
         } catch {
             // TODO: handle error
         } finally {
@@ -61,6 +65,7 @@ const DetailsPage = () => {
         if (isNonNullable(movie)) {
             return movie.credits?.cast.map(({ character, name, profile_path }) =>
                 <Card
+                    key={character}
                     title={name}
                     imgPath={profile_path}
                     subtitle={character}
@@ -69,6 +74,16 @@ const DetailsPage = () => {
             );
         }
     }
+
+    const getRecommendations = () =>
+        isNonNullable(recommendations) && recommendations?.map(({ title, poster_path, id }) =>
+            <Card
+                key={id}
+                title={title}
+                imgPath={poster_path}
+                small={true}
+            />
+        );
 
     return (
         <Container>
@@ -118,8 +133,18 @@ const DetailsPage = () => {
 
                     </header>
 
-                    <section className={styles.cast}>
-                        {getCast()}
+                    <section className={styles.section}>
+                        <h2>Cast</h2>
+                        <div className={styles.items}>
+                            {getCast()}
+                        </div>
+                    </section>
+
+                    <section className={styles.section}>
+                        <h2>Recommendations</h2>
+                        <div className={styles.items}>
+                            {getRecommendations()}
+                        </div>
                     </section>
                 </>
             }

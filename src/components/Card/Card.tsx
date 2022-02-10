@@ -5,7 +5,7 @@ import classnames from 'classnames';
 interface CardProps {
     title: string;
     imgPath: string;
-    subtitle: string | React.ReactNode;
+    subtitle?: string | React.ReactNode;
     small?: boolean;
 }
 

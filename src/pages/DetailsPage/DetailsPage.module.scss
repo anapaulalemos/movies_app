@@ -13,8 +13,12 @@
     }
 }
 
-.cast {
-    display: flex;
-    overflow-x: auto;
-    margin: 32px;
+
+.section {
+    padding: 32px;
+
+    .items {
+        display: flex;
+        overflow-x: auto;   
+    }
 }
