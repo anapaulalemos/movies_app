@@ -1,0 +1,10 @@
+.searchContainer {
+    display: flex;
+    justify-content: space-between;
+}
+
+.moviesContainer {
+    display: grid;
+    grid-template-columns: 25% 25% 25% 25%;
+    list-style: none;
+}
