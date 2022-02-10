@@ -40,6 +40,7 @@ const Search = ({
                 <input
                     type="text"
                     name="search"
+                    value={searchTerm}
                     onChange={onChangeSearchTerm}
                     disabled={loading}
                     placeholder={placeholder || 'Type a movie search'}
