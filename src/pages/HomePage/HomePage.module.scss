@@ -1,10 +1,104 @@
+@use '../../styles/variables';
+
 .searchContainer {
     display: flex;
     justify-content: space-between;
+    padding: 32px;
 }
 
 .moviesContainer {
-    display: grid;
-    grid-template-columns: 25% 25% 25% 25%;
+    overflow-y: auto;
+    height: calc(100vh - 200px);
+    width: 100%;
+    padding: 16px; 
+
+    ul {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        list-style: none;
+    }
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+.pagination {
+    margin: 0;
+    display: flex;
+    padding-left: 0;
     list-style: none;
+    justify-content: center;
+
+    .pageItem {
+        .pageLink {
+            padding: 8px 16px;
+            cursor: pointer;
+            position: relative;
+            display: block;
+            color: variables.$primary_color;
+            text-decoration: none;
+            background-color: variables.$background_color;
+            border: 1px solid variables.$background_color;
+            transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+            
+            &:hover {
+                cursor: pointer;
+                color: variables.$background_color;
+                background-color: variables.$primary_color;
+                border: 1px solid variables.$primary_color;
+
+                svg {
+                    color: variables.$background_color;
+                }
+            }
+        }
+
+        &.previous, &.next, &.break {
+            a {
+                border-color: transparent;
+            }
+        }
+
+        &.active .pageLink {
+            background-color: variables.$primary_color;
+            border-color: transparent;
+            color: variables.$background_color;
+            min-width: 32px;
+        }
+
+        &.disabled {
+            cursor: default;
+
+            .pageLink {
+                color: variables.$disabled_color;
+                cursor: default;
+
+                &:hover {
+                    background-color: variables.$background_color;
+                    border: 1px solid  variables.$background_color;;
+
+                    svg {
+                        color: variables.$disabled_color;
+                    }
+                }
+            }
+
+            svg {
+                color: variables.$disabled_color;
+            }
+        }
+
+        &:first-child .pageLink {
+            border-top-left-radius: 0.25rem;
+            border-bottom-left-radius: 0.25rem;
+        }
+
+        &:last-child .pageLink {
+            border-top-right-radius: 0.25rem;
+            border-bottom-right-radius: 0.25rem;
+        }
+    }
 }

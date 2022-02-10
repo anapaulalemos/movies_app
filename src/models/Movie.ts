@@ -6,6 +6,7 @@ interface Movie {
     original_title: string;
     original_language: string;
     title: string;
+    vote_average: number;
 }
 
 export default Movie;
