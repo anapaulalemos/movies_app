@@ -1,12 +1,13 @@
 const baseUrl = process.env.REACT_APP_API_URL;
 const token = process.env.REACT_APP_API_TOKEN;
 
-const getMovies = async (page: number) => {
+const getMovies = async (page: number, sortParam: string) => {
     const params: Record<string, any> = {
-        'page': page
+        'page': page,
+        'sort_by': sortParam
     };
 
-    const url = `${baseUrl}movie/popular`;
+    const url = `${baseUrl}discover/movie`;
     return await fetchGet(url, params);
 }
 

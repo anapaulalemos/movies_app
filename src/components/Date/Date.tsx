@@ -10,7 +10,7 @@ const Date = ({
     dateFormat = 'LLLL d, yyyy'
 }: DateProps) => {
     const date = parseISO(dateString)
-    return <time dateTime={dateString}>{format(date, dateFormat)}</time>
+    return dateString ? <time dateTime={dateString}>{format(date, dateFormat)}</time> : null;
 }
 
 export default Date;

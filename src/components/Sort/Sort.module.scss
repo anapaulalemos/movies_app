@@ -1,0 +1,16 @@
+@use '../../styles/variables';
+
+.sort {
+    min-width: 200px;
+    padding: 16px;
+    border-radius: 8px;
+    border: 1px solid variables.$primary_color;
+    color: variables.$primary_color;
+    background-color: variables.$secondary_color;
+}
+
+@media (max-width: 600px) {
+    .sort {
+        width: 250px;
+    }
+}

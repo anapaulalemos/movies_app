@@ -9,6 +9,7 @@ import Date from '../../components/Date/Date';
 import { Credits } from '../../models/Credits';
 import Movie from '../../models/Movie';
 import { getMovieCredits, getMovieDetail, getMovieRecommendations } from '../../utils/api';
+import { sentErrorNotification } from '../../utils/notification';
 import { isNonNullable, Nullable } from '../../utils/typeUtils';
 import styles from './DetailsPage.module.scss';
 
@@ -34,7 +35,7 @@ const DetailsPage = () => {
 
             setRecommendations(results);
         } catch {
-            // TODO: handle error
+            sentErrorNotification('Error when fetching movies');
         } finally {
             setLoading(false);
         }

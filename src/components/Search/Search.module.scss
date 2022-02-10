@@ -3,7 +3,6 @@
 .searchContainer {
     display: flex;
     align-items: center;
-    background-color: variables.$background_color;
     min-width: 250px;
     border-radius: 6px;
     background-color: variables.$secondary_color;
@@ -74,24 +73,5 @@
         border-width: 3px;
         width: 30px;
         height: 30px;
-    }
-}
-
-
-@media (max-width: 500px) {
-    .searchContainer {
-        flex-wrap: wrap;
-        justify-content: center;
-
-        button {
-            height: 48px;
-            padding: 8px;
-            margin: 0 8px;
-            border: none;
-            text-transform: uppercase;
-            background-color: transparent;
-            border-radius: 6px;
-            color: #00ADAC;
-        }
     }
 }

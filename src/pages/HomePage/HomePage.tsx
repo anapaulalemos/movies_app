@@ -9,25 +9,29 @@ import Date from '../../components/Date/Date';
 import Search from '../../components/Search/Search';
 import Sort from '../../components/Sort/Sort';
 import Movie from '../../models/Movie';
+import SortingOptions from '../../models/SortingOptions';
 import { getMovies, searchMovies } from '../../utils/api';
+import { sentErrorNotification } from '../../utils/notification';
 import { Nullable } from '../../utils/typeUtils';
 import styles from './HomePage.module.scss';
 
 
 const HomePage = () => {
     const [loading, setLoading] = useState(false);
-    const [movies, setMovies] = useState<Nullable<Movie[]>>(null);
     const [totalPages, setTotalPages] = useState(0);
+    const [sortParam, setSortParam] = useState(SortingOptions['Popularity ascending'])
+
+    const [movies, setMovies] = useState<Nullable<Movie[]>>(null);
 
     const fetchMovies = async (page = 1) => {
         try {
             setLoading(true);
-            const { results, total_pages } = await getMovies(page);
+            const { results, total_pages } = await getMovies(page, sortParam);
             setMovies(results);
             setTotalPages(total_pages);
         } catch {
-            // sentErrorNotification('Repos not found!');
-            // navigate('/');
+            sentErrorNotification('Error when fetching movies');
+            setMovies(null);
         } finally {
             setLoading(false);
         }
@@ -35,7 +39,7 @@ const HomePage = () => {
 
     useEffect(() => {
         fetchMovies();
-    }, []);
+    }, [sortParam]);
 
     const getMoviesContent = () =>
         movies &&
@@ -77,6 +81,11 @@ const HomePage = () => {
         }
     }
 
+    const onSort = (queryParam: SortingOptions) => {
+        //TODO: clear search term
+        setSortParam(queryParam);
+    }
+
     return (
         <Container>
             <section className={styles.searchContainer}>
@@ -84,7 +93,7 @@ const HomePage = () => {
                     loading={loading}
                     onSearch={onSearchMovies}
                 />
-                <Sort />
+                <Sort onSort={onSort} sortBy={sortParam} />
             </section>
 
             {loading && <div>loading</div>}
