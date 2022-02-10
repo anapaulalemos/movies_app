@@ -70,6 +70,7 @@ const customFetch = async ({
 }) => {
     const queryParams: Record<string, any> = {
         'api_key': token,
+        'language': 'en-US',
         ...params
     };
 

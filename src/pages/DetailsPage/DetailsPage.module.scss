@@ -12,7 +12,6 @@
         max-height: 280px;
     }
 
-
     .imgContainer {
         display: flex;
         flex-direction: column;
@@ -49,6 +48,15 @@
         overflow-x: auto;   
     }
 }
+
+
+.loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 32px;
+}
+
 
 @media (max-width: 600px) {
     .header {

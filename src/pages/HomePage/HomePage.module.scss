@@ -8,8 +8,12 @@
 }
 
 .moviesContainer {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
     overflow-y: auto;
-    height: calc(100vh - 200px);
+    height: calc(100vh - 240px);
+    margin-bottom: 16px;
     width: 100%;
     padding: 16px; 
 
@@ -19,11 +23,11 @@
         flex-wrap: wrap;
         list-style: none;
     }
-}
-
-a {
-    text-decoration: none;
-    color: black;
+    
+    a {
+        text-decoration: none;
+        color: black;
+    }
 }
 
 .pagination {
@@ -109,5 +113,9 @@ a {
         flex-wrap: wrap;
         justify-content: center;
         row-gap: 16px;
+    }
+
+    .moviesContainer {
+        height: calc(100vh - 310px);
     }
 }

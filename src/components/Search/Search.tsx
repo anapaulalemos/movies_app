@@ -1,18 +1,24 @@
 import styles from './Search.module.scss';
 
-import { FormEvent, useState } from 'react';
+import { Dispatch, FormEvent, SetStateAction } from 'react';
 import { FaSearch } from 'react-icons/fa';
 import { isNonNullable } from '../../utils/typeUtils';
 
 interface SearchProps {
     onSearch: (searchTerm: string) => void;
     loading: boolean;
+    searchTerm: string;
+    setSearchTerm: Dispatch<SetStateAction<string>>;
     placeholder?: string;
 }
 
-const Search = ({ onSearch, placeholder, loading }: SearchProps) => {
-    const [searchTerm, setSearchTerm] = useState('');
-
+const Search = ({
+    onSearch,
+    placeholder,
+    loading,
+    searchTerm,
+    setSearchTerm
+}: SearchProps) => {
     const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
 

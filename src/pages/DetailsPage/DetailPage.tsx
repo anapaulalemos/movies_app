@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { FaCalendar, FaClock, FaLanguage } from 'react-icons/fa';
+import { Oval } from 'react-loader-spinner';
 import { useParams } from 'react-router-dom';
 import ReactStars from 'react-stars';
 
@@ -100,7 +101,12 @@ const DetailsPage = () => {
 
     return (
         <Container>
-            {movie &&
+            {loading ?
+                <section className={styles.loading}>
+                    <Oval color="#00ADAC" height={60} width={60} />
+                </section>
+                :
+                movie &&
                 <>
                     <header className={styles.header}>
                         <section className={styles.imgContainer}>
