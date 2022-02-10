@@ -1,0 +1,20 @@
+@use '../../styles/variables';
+
+.header {
+    display: flex;
+    min-height: 360px;
+    padding: 32px;
+    background-color: variables.$secondary_color;
+    border-bottom: 1px solid variables.$primary_color;
+    column-gap: 32px;
+
+    object {
+        max-height: 280px;
+    }
+}
+
+.cast {
+    display: flex;
+    overflow-x: auto;
+    margin: 32px;
+}

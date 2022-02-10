@@ -15,6 +15,10 @@ const getMovieDetail = async (id: string) => {
     return await fetchGet(url);
 }
 
+const getMovieCredits = async (id: string) => {
+    const url = `${baseUrl}movie/${id}/credits`;
+    return await fetchGet(url);
+}
 
 const searchMovies = async (query: string) => {
     const params: Record<string, any> = {
@@ -58,5 +62,6 @@ const buildQueryParams = (params: Record<string, any>) => {
 export {
     getMovies,
     getMovieDetail,
-    searchMovies
+    searchMovies,
+    getMovieCredits,
 }

@@ -15,9 +15,16 @@
         background-color:  variables.$hover_color;
     }
     
-    img {
+    img, object {
         border-top-left-radius: 16px;
         border-top-right-radius: 16px;
+    }
+
+    .imgNotFound {
+        height: 298px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
     
     .footer {
@@ -34,5 +41,24 @@
             margin-bottom: 8px;
             font-weight: 700;
         }
+    }
+}
+
+.smallCard {
+    height: 280px;
+
+    object {
+        width: 130px;
+    }
+
+    img {
+        width: 100px;
+    }
+
+    .imgNotFound {
+        height: 180px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
 }

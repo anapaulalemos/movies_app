@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
+import { FaArrowLeft, FaArrowRight } from 'react-icons/fa';
 import ReactPaginate from 'react-paginate';
 import { Link } from 'react-router-dom';
 
-import { FiArrowLeft, FiArrowRight } from 'react-icons/fi';
-
 import Card from '../../components/Card/Card';
 import Container from '../../components/Container/Container';
+import Date from '../../components/Date/Date';
 import Search from '../../components/Search/Search';
 import Sort from '../../components/Sort/Sort';
 import Movie from '../../models/Movie';
@@ -48,7 +48,7 @@ const HomePage = () => {
                     <Card
                         title={original_title}
                         imgPath={poster_path}
-                        releaseDate={release_date}
+                        subtitle={<Date dateString={release_date} />}
                     />
                 </Link>
             )) : (
@@ -98,10 +98,11 @@ const HomePage = () => {
                     </section>
 
                     {movies && movies.length > 0 &&
+                        // TODO: fix pagination
                         <ReactPaginate
                             breakLabel="..."
-                            nextLabel={<FiArrowRight />}
-                            previousLabel={<FiArrowLeft />}
+                            nextLabel={<FaArrowRight />}
+                            previousLabel={<FaArrowLeft />}
                             onPageChange={(e) => fetchMovies(e.selected + 1)}
                             pageCount={getPageCount()}
                             pageRangeDisplayed={4}

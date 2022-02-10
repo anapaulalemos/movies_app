@@ -1,7 +1,7 @@
 import styles from './Search.module.scss';
 
 import { FormEvent, useState } from 'react';
-import { FiSearch } from 'react-icons/fi';
+import { FaSearch } from 'react-icons/fa';
 import { isNonNullable } from '../../utils/typeUtils';
 
 interface SearchProps {
@@ -47,7 +47,7 @@ const Search = ({ onSearch, placeholder, loading }: SearchProps) => {
                 disabled={!searchTerm && loading}
             >
                 {/* TODO: user loading */}
-                <FiSearch size={24} />
+                <FaSearch size={24} />
             </button>
         </form>
     );
