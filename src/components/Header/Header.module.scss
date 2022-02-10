@@ -1,15 +1,17 @@
+@use '../../styles/variables';
+
 .header {
     display: flex;
     justify-content: space-between;
     padding: 16px 32px;
-    background-color: #360568;
+    background-color: variables.$primary_color;
 
     .logo {
         height: 20px;
     }
 
     nav a {
-        color: #FFF;
+        color: variables.$background_color;
         text-decoration: none;
     }
 }

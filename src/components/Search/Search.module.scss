@@ -1,0 +1,97 @@
+@use '../../styles/variables';
+
+.searchContainer {
+    display: flex;
+    align-items: center;
+    background-color: variables.$background_color;
+    min-width: 250px;
+    border-radius: 6px;
+    background-color: variables.$secondary_color;
+    border: 1px solid variables.$primary_color;
+    
+    .inputContainer {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        padding: 8px;
+        
+        input {
+            display: flex;
+            height: 30px;
+            width: 250px;
+            margin: 0 12px;
+            border: none;
+            background-color: transparent;
+            font-size: 16px;
+            color: #00ADAC;
+            
+            &:focus, &:active {
+                outline: none;
+            }
+
+            &:disabled {
+                color: variables.$disabled_color;
+            }
+        }
+    }
+
+    button {
+        height: 48px;
+        padding: 8px;
+        margin-left: 8px;
+        border: none;
+        text-transform: uppercase;
+        background-color: transparent;
+        border-radius: 6px;
+        color: variables.$primary_color;
+        
+        &:disabled {
+            svg {
+                color: variables.$disabled_color;
+            }
+        }
+
+        &:hover {
+            background-color: variables.$secondary_color;
+
+            &:disabled {
+                background-color: transparent;
+            }
+            
+            &:not(:disabled) {
+                cursor: pointer;
+            }
+        }
+    }
+}
+
+.loaderRing {
+    width: 30px;
+    height: 30px;
+
+    div {
+        margin: 0px;
+        border-width: 3px;
+        width: 30px;
+        height: 30px;
+    }
+}
+
+
+@media (max-width: 500px) {
+    .searchContainer {
+        flex-wrap: wrap;
+        justify-content: center;
+
+        button {
+            height: 48px;
+            padding: 8px;
+            margin: 0 8px;
+            border: none;
+            text-transform: uppercase;
+            background-color: transparent;
+            border-radius: 6px;
+            color: #00ADAC;
+        }
+    }
+}

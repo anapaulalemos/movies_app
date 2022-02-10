@@ -11,14 +11,14 @@ const Card = ({
     imgPath,
     releaseDate
 }: CardProps) => (
-    <article className={styles.card}>
+    <article className={styles.card} title={`Go to '${title}' details`}>
         <img
             alt="Poster"
             src={`https://image.tmdb.org/t/p/original/${imgPath}`}
-            width={200}
+            width={199}
         />
         <div className={styles.footer}>
-            <h3>{title}</h3>
+            <span className={styles.title}>{title}</span>
             <span >{releaseDate}</span>
         </div>
     </article>

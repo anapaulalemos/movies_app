@@ -15,6 +15,16 @@ const getMovieDetail = async (id: string) => {
     return await fetchGet(url);
 }
 
+
+const searchMovies = async (query: string) => {
+    const params: Record<string, any> = {
+        'query': query
+    };
+
+    const url = `${baseUrl}search/movie`;
+    return await fetchGet(url, params);
+}
+
 const fetchGet = async (url: string, params?: Record<string, any>) => {
     const queryParams: Record<string, any> = {
         'api_key': token,
@@ -48,5 +58,5 @@ const buildQueryParams = (params: Record<string, any>) => {
 export {
     getMovies,
     getMovieDetail,
-
+    searchMovies
 }

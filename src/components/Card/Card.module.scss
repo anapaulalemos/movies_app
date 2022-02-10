@@ -1,12 +1,19 @@
+@use '../../styles/variables';
+
 .card {
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: #FFF;
+    background-color: variables.$background_color;
     border-radius: 16px;
-    border: 1px solid #E5E5E5;
+    border: 1px solid variables.$primary_color;
     margin: 16px;
     width: 200px;
+    height: 400px;
+
+    &:hover {
+        background-color:  variables.$hover_color;
+    }
     
     img {
         border-top-left-radius: 16px;
@@ -20,8 +27,11 @@
         justify-content: center;
         text-align: center;
         text-decoration: none;
+        font-size: 14px;
+        color:  variables.$primary_color;
         
         .title {
+            margin-bottom: 8px;
             font-weight: 700;
         }
     }
