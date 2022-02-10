@@ -6,8 +6,10 @@ const HomePage = () => (
         <section className={styles.searchContainer}>
             <input type="text" title="search" placeholder="search" />
             <select name="filter">
-                <option>Name ascending</option>
-                <option>Name descending</option>
+                <option>Title (A-Z)</option>
+                <option>Title (Z-A)</option>
+                <option>Rating descending</option>
+                <option>Rating ascending</option>
             </select>
         </section>
 
