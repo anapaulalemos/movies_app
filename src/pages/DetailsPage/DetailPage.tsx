@@ -1,4 +1,5 @@
-import { useEffect, useState } from 'react';
+import { format, parseISO } from 'date-fns';
+import { useCallback, useEffect, useState } from 'react';
 import { FaCalendar, FaClock, FaLanguage } from 'react-icons/fa';
 import { Oval } from 'react-loader-spinner';
 import { useParams } from 'react-router-dom';
@@ -7,7 +8,6 @@ import ReactStars from 'react-stars';
 import NotFound from '../../assets/not_found.png';
 import Card from '../../components/Card/Card';
 import Container from '../../components/Container/Container';
-import Date from '../../components/Date/Date';
 import { Credits } from '../../models/Credits';
 import Movie from '../../models/Movie';
 import { createGuestSessionId, getMovieCredits, getMovieDetail, getMovieRecommendations, rateMovie } from '../../utils/api';
@@ -22,7 +22,7 @@ const DetailsPage = () => {
     const [movie, setMovie] = useState<Nullable<Movie>>(null);
     const [recommendations, setRecommendations] = useState<Nullable<Movie[]>>(null)
 
-    const fetchMovie = async () => {
+    const fetchMovie = useCallback(async () => {
         setLoading(true);
 
         try {
@@ -41,11 +41,11 @@ const DetailsPage = () => {
         } finally {
             setLoading(false);
         }
-    };
+    }, [id]);
 
     useEffect(() => {
         fetchMovie();
-    }, [id]);
+    }, [id, fetchMovie]);
 
     const onRateMovie = async (rate: number) => {
         try {
@@ -136,7 +136,8 @@ const DetailsPage = () => {
                             <h4>
                                 <span title="Release date">
                                     <FaCalendar />
-                                    &nbsp;<Date dateString={movie.release_date!} />
+                                    &nbsp;
+                                    {movie.release_date ? format(parseISO(movie.release_date), 'LLLL d, yyyy') : ''}
                                 </span>
                                 &nbsp; | &nbsp;
                                 <span title="Language">
@@ -176,7 +177,7 @@ const DetailsPage = () => {
                     </section>
 
                     <section className={styles.section}>
-                        <h2>Recommendations</h2>
+                        <h2> Movie recommendations</h2>
                         <div className={styles.items}>
                             {getRecommendations()}
                         </div>

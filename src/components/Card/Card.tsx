@@ -5,7 +5,7 @@ import classnames from 'classnames';
 interface CardProps {
     title: string;
     imgPath: string;
-    subtitle?: string | React.ReactNode;
+    subtitle?: string;
     small?: boolean;
 }
 
@@ -34,8 +34,13 @@ const Card = ({
             </object>
 
             <div className={styles.footer}>
-                <span className={styles.title}>{title}</span>
-                {subtitle}
+                <span
+                    className={styles.title}
+                    title={title}
+                >
+                    {title}
+                </span>
+                <span title={subtitle}>{subtitle}</span>
             </div>
         </article >
     );

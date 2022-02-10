@@ -36,10 +36,22 @@
         text-decoration: none;
         font-size: 14px;
         color:  variables.$primary_color;
-        
+
+        span {
+            display: inline-block;
+            width: 180px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
         .title {
             margin-bottom: 8px;
             font-weight: 700;
+            white-space: inherit;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
         }
     }
 }
@@ -60,5 +72,11 @@
         display: flex;
         justify-content: center;
         align-items: center;
+    }
+
+    .footer {
+        span {
+            width: 100px;
+        }
     }
 }

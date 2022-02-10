@@ -1,9 +1,9 @@
+import { format, parseISO } from 'date-fns';
 import { Oval } from 'react-loader-spinner';
 import { Link } from 'react-router-dom';
 
 import Movie from '../../models/Movie';
 import Card from '../Card/Card';
-import Date from '../Date/Date';
 import styles from './Movies.module.scss';
 
 interface RepositoriesInfoProps {
@@ -30,7 +30,7 @@ const Movies = ({
                     <Card
                         title={original_title}
                         imgPath={poster_path}
-                        subtitle={<Date dateString={release_date} />}
+                        subtitle={release_date ? format(parseISO(release_date), 'LLLL d, yyyy') : ''}
                     />
                 </Link>
             )) : (

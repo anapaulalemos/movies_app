@@ -6,7 +6,8 @@
     border-radius: 8px;
     border: 1px solid variables.$primary_color;
     color: variables.$primary_color;
-    background-color: variables.$secondary_color;
+    background-color: variables.$background_color;
+    font-size: 16px;
 }
 
 @media (max-width: 600px) {

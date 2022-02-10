@@ -1,3 +1,4 @@
+@use './styles/variables';
 @import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700;800&display=swap');
 
 body {
@@ -5,6 +6,7 @@ body {
   font-family: 'Nanum Gothic', sans-serif;
     -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: variables.$secondary_color;
 }
 
 * {
