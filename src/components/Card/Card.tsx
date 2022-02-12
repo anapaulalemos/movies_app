@@ -1,6 +1,7 @@
-import styles from './Card.module.scss';
-import NotFound from '../../assets/not_found.png';
 import classnames from 'classnames';
+
+import NotFound from '../../assets/not_found.png';
+import styles from './Card.module.scss';
 
 interface CardProps {
     title: string;
@@ -23,15 +24,23 @@ const Card = ({
         <article
             className={classNames}
         >
-            <object data={`https://image.tmdb.org/t/p/original/${imgPath}`} width={198} type="image/jpeg">
-                <div className={styles.imgNotFound}>
-                    <img
-                        alt="Poster"
-                        src={NotFound}
-                        width={198}
-                    />
-                </div>
-            </object>
+            <div
+                className={styles.placeholder}
+                style={{
+                    height: small ? '194px' : '298px',
+                    width: small ? '130px' : '198px'
+                }}
+            >
+                <object data={`https://image.tmdb.org/t/p/original/${imgPath}`} width={198} type="image/jpeg">
+                    <div className={styles.imgNotFound}>
+                        <img
+                            alt="Poster"
+                            src={NotFound}
+                            width={198}
+                        />
+                    </div>
+                </object>
+            </div>
 
             <div className={styles.footer}>
                 <span

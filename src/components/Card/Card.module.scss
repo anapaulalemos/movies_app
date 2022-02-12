@@ -6,7 +6,7 @@
     align-items: center;
     background-color: variables.$background_color;
     border-radius: 16px;
-    border: 1px solid variables.$primary_color;
+    border: 2px solid variables.$primary_color;
     margin: 16px;
     width: 200px;
     height: 400px;
@@ -79,4 +79,9 @@
             width: 100px;
         }
     }
+}
+
+.placeholder {
+    border-top-left-radius: 16px;
+    border-top-right-radius: 16px;
 }
