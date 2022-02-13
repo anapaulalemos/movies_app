@@ -30,6 +30,9 @@ const BarChart = ({ datasets }: BarChartProps) => {
                 display: false,
             },
         },
+        onHover: function (event, element) {
+            (event.native?.target as any).style.cursor = 'pointer';
+        },
         scales: {
             x: {
                 title: {
