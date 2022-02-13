@@ -37,35 +37,6 @@
             }
         }
     }
-
-    button {
-        height: 48px;
-        padding: 8px;
-        margin-left: 8px;
-        border: none;
-        text-transform: uppercase;
-        background-color: transparent;
-        border-radius: 6px;
-        color: variables.$primary_color;
-        
-        &:disabled {
-            svg {
-                color: variables.$disabled_color;
-            }
-        }
-
-        &:hover {
-            background-color: variables.$secondary_color;
-
-            &:disabled {
-                background-color: transparent;
-            }
-            
-            &:not(:disabled) {
-                cursor: pointer;
-            }
-        }
-    }
 }
 
 .loaderRing {

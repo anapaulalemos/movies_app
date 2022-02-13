@@ -3,6 +3,7 @@ import styles from './Search.module.scss';
 import { Dispatch, FormEvent, SetStateAction } from 'react';
 import { FaSearch } from 'react-icons/fa';
 import { isNonNullable } from '../../utils/typeUtils';
+import Button from '../Button/Button';
 
 interface SearchProps {
     onSearch: (searchTerm: string) => void;
@@ -47,15 +48,13 @@ const Search = ({
                 />
             </section>
 
-            <button
+            <Button
                 type="submit"
                 title="Search"
                 name="submitButton"
+                icon={<FaSearch size={24} />}
                 disabled={!searchTerm && loading}
-            >
-                {/* TODO: user loading */}
-                <FaSearch size={24} />
-            </button>
+            />
         </form>
     );
 };

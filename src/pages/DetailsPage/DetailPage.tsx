@@ -37,6 +37,7 @@ const DetailsPage = () => {
 
             setRecommendations(results);
         } catch {
+            setRecommendations([]);
             sentErrorNotification('Error when fetching movies');
         } finally {
             setLoading(false);

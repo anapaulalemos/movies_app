@@ -1,19 +1,23 @@
 import { format, parseISO } from 'date-fns';
+import { FaSync } from 'react-icons/fa';
 import { Oval } from 'react-loader-spinner';
 import { Link } from 'react-router-dom';
 
 import Movie from '../../models/Movie';
+import Button from '../Button/Button';
 import Card from '../Card/Card';
 import styles from './Movies.module.scss';
 
 interface RepositoriesInfoProps {
     loading: boolean;
     movies: Movie[];
+    onRefresh?: (event: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
 const Movies = ({
     movies,
-    loading
+    loading,
+    onRefresh
 }: RepositoriesInfoProps) => {
     if (loading) {
         return <Oval color="#00ADAC" height={60} width={60} />;
@@ -34,8 +38,20 @@ const Movies = ({
                     />
                 </Link>
             )) : (
-                // TODO: no found message
-                <div>No movie found</div>
+                <section className={styles.noMovies}>
+                    <h2>No movies found!</h2>
+                    <h4>
+                        Click
+                        <Button
+                            type="button"
+                            title="Click to refresh"
+                            icon={<FaSync size={24} />}
+                            onClick={onRefresh}
+                        />
+                        to refresh the page.
+                    </h4>
+
+                </section>
             );
 
     return (

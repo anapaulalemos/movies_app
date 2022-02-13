@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react';
+import { MouseEvent, useCallback, useEffect, useState } from 'react';
 import { FaArrowLeft, FaArrowRight } from 'react-icons/fa';
 import ReactPaginate from 'react-paginate';
 
@@ -20,7 +20,7 @@ const HomePage = () => {
     const [totalPages, setTotalPages] = useState(0);
 
     const [searchTerm, setSearchTerm] = useState('');
-    const [sortParam, setSortParam] = useState(SortingOptions['Popularity ascending'])
+    const [sortParam, setSortParam] = useState(SortingOptions['Popularity descending'])
 
     const [movies, setMovies] = useState<Movie[]>([]);
 
@@ -62,9 +62,15 @@ const HomePage = () => {
             setTotalPages(total_results);
         } catch {
             sentErrorNotification('Error when searching the movies');
+            setMovies([]);
         } finally {
             setLoading(false);
         }
+    }
+
+    const onRefresh = (event: MouseEvent<HTMLButtonElement>) => {
+        fetchMovies();
+        setSearchTerm('');
     }
 
     const onSort = (queryParam: SortingOptions) => {
@@ -89,6 +95,7 @@ const HomePage = () => {
                 <Movies
                     loading={loading}
                     movies={movies}
+                    onRefresh={onRefresh}
                 />
             </section>
             {movies && movies.length > 0 &&
