@@ -1,6 +1,7 @@
-import { BarElement, CategoryScale, Chart as ChartJS, Legend, LinearScale, Title, Tooltip } from 'chart.js';
-import React from 'react';
+import { BarControllerChartOptions, BarElement, BarOptions, CategoryScale, Chart as ChartJS, ChartOptions, Legend, LinearScale, Title, Tooltip } from 'chart.js';
 import { Bar } from 'react-chartjs-2';
+
+import ChartDataset from '../../models/ChartDataset';
 
 ChartJS.register(
     CategoryScale,
@@ -11,36 +12,33 @@ ChartJS.register(
     Legend
 );
 
-export const options = {
-    responsive: true,
-    plugins: {
-        legend: {
-            position: 'top' as const,
-        },
-        title: {
-            display: true,
-            text: 'Chart.js Bar Chart',
-        },
-    },
-};
-
-const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
-
-export const data = {
-    labels,
-    datasets: [
-        {
-            label: 'Dataset 1',
-            data: labels.map(() => faker.datatype.number({ min: 0, max: 1000 })),
-            backgroundColor: 'rgba(255, 99, 132, 0.5)',
-        }
-    ],
-};
-
 interface BarChartProps {
-    labels: string[];
+    datasets: ChartDataset;
 }
 
-export function BarChart() {
-    return <Bar options={options} data={data} />;
+const BarChart = ({ datasets }: BarChartProps) => {
+    const options: ChartOptions<"bar"> = {
+        responsive: true,
+        plugins: {
+            title: {
+                display: false
+            },
+            legend: {
+                display: false,
+            },
+        },
+        scales: {
+            x: {
+                ticks: {
+                    callback: function (val: any, index: any) {
+                        return `${this.getLabelForValue(val).substring(0, 9)}...`;
+                    },
+                }
+            },
+        }
+    };
+
+    return <Bar options={options} data={datasets} />;
 }
+
+export default BarChart;

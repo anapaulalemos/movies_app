@@ -1,0 +1,24 @@
+@use '../../styles/variables';
+
+.chartContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.chart {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    background-color: variables.$background_color;
+    border-radius: 16px;
+    border: 2px solid variables.$primary_color;
+    margin: 32px;
+    padding: 16px;
+    width: 600px;
+    height: 400px;
+
+    h1 {
+        margin-bottom: 32px;
+    }
+}

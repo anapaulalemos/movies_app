@@ -4,7 +4,8 @@ const token = process.env.REACT_APP_API_TOKEN;
 const getMovies = async (page: number, sortParam: string) => {
     const params: Record<string, any> = {
         'page': page,
-        'sort_by': sortParam
+        'sort_by': sortParam,
+        'vote_count.gte': 300
     };
 
     const url = `${baseUrl}discover/movie`;
