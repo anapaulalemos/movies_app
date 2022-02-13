@@ -45,7 +45,11 @@
 
     .items {
         display: flex;
-        overflow-x: auto;   
+        overflow-x: auto;
+
+        .link {
+            text-decoration: none;
+        }
     }
 }
 

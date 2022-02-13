@@ -2,7 +2,7 @@ import { format, parseISO } from 'date-fns';
 import { useCallback, useEffect, useState } from 'react';
 import { FaCalendar, FaClock, FaLanguage } from 'react-icons/fa';
 import { Oval } from 'react-loader-spinner';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import ReactStars from 'react-stars';
 
 import NotFound from '../../assets/not_found.png';
@@ -92,12 +92,17 @@ const DetailsPage = () => {
 
     const getRecommendations = () =>
         isNonNullable(recommendations) && recommendations?.map(({ title, poster_path, id }) =>
-            <Card
+            <Link
+                to={`/movie/${id}`}
                 key={id}
-                title={title}
-                imgPath={poster_path}
-                small={true}
-            />
+                className={styles.link}
+                title="Click to go to the movie"
+            >
+                <Card
+                    title={title}
+                    imgPath={poster_path}
+                />
+            </Link>
         );
 
     return (
