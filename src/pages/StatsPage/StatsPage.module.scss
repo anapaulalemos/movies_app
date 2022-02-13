@@ -15,10 +15,24 @@
     border: 2px solid variables.$primary_color;
     margin: 32px;
     padding: 16px;
-    width: 600px;
-    height: 400px;
+    width: 800px;
+    height: 490px;
 
     h1 {
         margin-bottom: 32px;
+    }
+}
+
+@media (max-width: 850px) {
+    .chart {
+        width: 600px;
+        height: 400px;
+    }
+}
+
+@media (max-width: 650px) {
+    .chart {
+        width: 380px;
+        height: 280px;
     }
 }

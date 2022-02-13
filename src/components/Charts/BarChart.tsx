@@ -1,5 +1,6 @@
-import { BarControllerChartOptions, BarElement, BarOptions, CategoryScale, Chart as ChartJS, ChartOptions, Legend, LinearScale, Title, Tooltip } from 'chart.js';
+import { BarElement, CategoryScale, Chart as ChartJS, ChartOptions, Legend, LinearScale, Title, Tooltip } from 'chart.js';
 import { Bar } from 'react-chartjs-2';
+import { useNavigate } from 'react-router-dom';
 
 import ChartDataset from '../../models/ChartDataset';
 
@@ -17,6 +18,8 @@ interface BarChartProps {
 }
 
 const BarChart = ({ datasets }: BarChartProps) => {
+    const navigate = useNavigate();
+
     const options: ChartOptions<"bar"> = {
         responsive: true,
         plugins: {
@@ -53,6 +56,14 @@ const BarChart = ({ datasets }: BarChartProps) => {
                     }
                 }
             }
+        },
+        parsing: {
+            xAxisKey: 'title',
+            yAxisKey: 'index'
+        },
+        onClick: (evt, element) => {
+            const { id } = (element[0].element as any).$context.raw;
+            navigate(`/movie/${id}`);
         }
     };
 

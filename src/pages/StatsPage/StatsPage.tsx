@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useState } from 'react';
+import { Oval } from 'react-loader-spinner';
 
 import BarChart from '../../components/Charts/BarChart';
 import Container from '../../components/Container/Container';
@@ -7,7 +8,6 @@ import SortingOptions from '../../models/SortingOptions';
 import { getMovies } from '../../utils/api';
 import { sentErrorNotification } from '../../utils/notification';
 import { Nullable } from '../../utils/typeUtils';
-
 import styles from './StatsPage.module.scss';
 
 const StatsPage = () => {
@@ -17,7 +17,7 @@ const StatsPage = () => {
     const fetchMovies = useCallback(async (currentPage = 0) => {
         try {
             setLoading(true);
-            const { results, total_pages } = await getMovies(1, SortingOptions['Rating descending']);
+            const { results } = await getMovies(1, SortingOptions['Rating descending']);
             setMovies(results);
         } catch {
             sentErrorNotification('Error when fetching movies');
@@ -35,8 +35,8 @@ const StatsPage = () => {
         const data: any[] = [];
         const labels: Nullable<string[]> = [];
 
-        movies?.slice(0, 10).forEach(({ title }, index) => {
-            data.push(1 + index);
+        movies?.slice(0, 10).forEach(({ title, id }, index) => {
+            data.push({ id, index: index + 1, title });
             labels.push(title);
         });
 
@@ -60,7 +60,11 @@ const StatsPage = () => {
             <div className={styles.chartContainer}>
                 <section className={styles.chart}>
                     <h1>Top 10 rated movies</h1>
-                    {getBarChart()}
+                    {loading ?
+                        <section className={styles.loading}>
+                            <Oval color="#00ADAC" height={60} width={60} />
+                        </section> :
+                        getBarChart()}
                 </section>
             </div>
         </Container>
