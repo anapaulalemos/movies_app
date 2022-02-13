@@ -29,12 +29,30 @@ const BarChart = ({ datasets }: BarChartProps) => {
         },
         scales: {
             x: {
+                title: {
+                    display: true,
+                    text: 'Top movies',
+                    font: {
+                        size: 16,
+                        weight: 'bold'
+                    }
+                },
                 ticks: {
                     callback: function (val: any, index: any) {
                         return `${this.getLabelForValue(val).substring(0, 9)}...`;
                     },
                 }
             },
+            y: {
+                title: {
+                    display: true,
+                    text: 'Position',
+                    font: {
+                        size: 16,
+                        weight: 'bold'
+                    }
+                }
+            }
         }
     };
 
